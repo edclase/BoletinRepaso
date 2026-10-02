@@ -4,7 +4,9 @@ fun main() {
     //mayorMenor()
     //arrayPersonalizado()
     //aleatorios()
-    aleatoriosplus()
+    //aleatoriosplus()
+    //matriz3x3()
+    matrizTamanos()
 }
 
 fun mayorMenor() {
@@ -41,15 +43,17 @@ fun arrayPersonalizado() {
     var array : IntArray = IntArray(0)
     while (!ready) {
         println("Introduce un numero entre 3 y 8")
-        val input = readln()
-        if (input.toInt() >= 3 && input.toInt() <= 8) {
-            array = IntArray(input.toInt())
+        val input = readln().toInt()
+        if (input in 2..8) {
+            array = IntArray(input)
             ready = true
+        } else {
+            println("El numero $input no es valido")
         }
     }
     for (i in array.indices) {
         println("Numero para el indice: ${i+1}")
-        array[i] = readLine()!!.toInt()
+        array[i] = readln().toInt()
     }
     println(array.contentToString())
 }
@@ -86,10 +90,30 @@ fun aleatoriosplus() {
     println("Encontrado el numero: $input ${list.size} veces")
 }
 fun matriz3x3() {
-    var matrix = arrayOf(
-        intArrayOf(),
-        intArrayOf(),
-        intArrayOf()
-    )
+    var array = Array(4) {IntArray(4) {(0..9).random()} }
+    array.forEach {
+        println(it.contentToString())
+    }
 }
-//fun matrizTamanos() {}
+fun matrizTamanos() {
+    println("Introduce un numero entre 2 y 5")
+    val input = readln().toInt()
+
+    if (input in 2..5) {
+        println("Numero entre 2 y 5 $input")
+    } else {
+        println("El numero $input no es valido")
+        matrizTamanos()
+    }
+    var array = Array(input)  {IntArray(input)}
+
+    array.forEachIndexed { aindex, ar ->
+        ar.forEachIndexed {
+            bindex, value ->
+            println("Valor $bindex de: $value x $aindex")
+            array[aindex][bindex] = readln().toInt()
+
+        }
+    }
+    array.forEach { println(it.contentToString()) }
+}
